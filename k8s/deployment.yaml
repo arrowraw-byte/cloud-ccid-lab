@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: DOCKERHUB_USERNAME/cloud-ccid-lab:latest
+          image: aaravarora/cloud-ccid-lab:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
