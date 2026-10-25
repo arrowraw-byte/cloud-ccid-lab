@@ -1,0 +1,33 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-ccid-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloud-ccid-app
+  template:
+    metadata:
+      labels:
+        app: cloud-ccid-app
+    spec:
+      containers:
+        - name: flask-app
+          image: DOCKERHUB_USERNAME/cloud-ccid-lab:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 20
